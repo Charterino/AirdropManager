@@ -1,16 +1,5 @@
 # AirdropManager - RocketMod5 Plugin
-* Plugin is available in both RocketMod 4 and 5 versions
-* Allows you to create airdrops with custom loot
-* Allows you to create targets for airdrops or you can use default
-* Allows you to set up ChatMaster like message (with size, colors, style and icon)
-* Allows you to blacklist unwanted airdrops by id
-
-## Commands
-* /airdrop - Calls in an airdrop
-* /whenairdrop - Shows time left to next airdrop
-* /setairdrop \<airdrop id\> - Saves you current position as airdrop target
-
-## Configuration
+### Configuration
 ```yml
 UseDefaultSpawns: true
 UseDefaultAirdrops: false
@@ -33,7 +22,7 @@ AirdropSpawns:
 BlacklistedAirdrops: []
 ```
 
-## Translation
+### Translation
 ```yml
 NextAirdrop: Next airdrop will be in {0}!
 ```
