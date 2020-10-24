@@ -24,10 +24,10 @@ namespace RestoreMonarchy.AirdropManager
 
         public override TranslationList DefaultTranslations =>  new TranslationList()
         {
-            { "NextAirdrop", "Next airdrop will be in {0}" },
+            { "NextAirdrop", "Следующий аирдроп упадёт через {0}" },
             { "SuccessAirdrop", "Successfully called in airdrop!" },
             { "SuccessMassAirdrop", "Successfully called in mass airdrop!" },            
-            { "Airdrop", "{size=17}{color=magenta}{i}Airdrop{/i} is coming!{/color}{/size}" },
+            { "Airdrop", "{size=17}{color=magenta}{i}Аирдроп{/i} вылетел!{/color}{/size}" },
             { "MassAirdrop", "{size=17}{color=magenta}{i}Mass Airdrop{/i} is coming!{/color}{/size}" },
             { "SetAirdropFormat", "Format: /setairdrop <AirdropID>" },
             { "SetAirdropSuccess", "Successfully set an airdrop spawn at your position!" },
@@ -44,6 +44,12 @@ namespace RestoreMonarchy.AirdropManager
             AirdropTimer.Start();
             AirdropTimerNext = DateTime.Now.AddSeconds(Configuration.Instance.AirdropInterval);
 
+            ItemStorageAsset carepackageAsset = (ItemStorageAsset)Assets.find(EAssetType.ITEM, 1374);
+            var x = typeof(ItemStorageAsset).GetField("_storage_x", BindingFlags.NonPublic | BindingFlags.Instance);
+            var y = typeof(ItemStorageAsset).GetField("_storage_y", BindingFlags.NonPublic | BindingFlags.Instance);
+            x.SetValue(carepackageAsset, Configuration.Instance.CarepackageStorageX);
+            y.SetValue(carepackageAsset, Configuration.Instance.CarepackageStorageY);
+            
             foreach (Airdrop airdrop in Configuration.Instance.Airdrops)
             {
                 if (Configuration.Instance.BlacklistedAirdrops.Contains(airdrop.AirdropId))
@@ -70,6 +76,7 @@ namespace RestoreMonarchy.AirdropManager
 
             Logger.Log($"{Name} {Assembly.GetName().Version} has been loaded!", ConsoleColor.Yellow);
             Logger.Log($"Brought to You by RestoreMonarchy.com", ConsoleColor.Yellow);
+            Logger.Log($"Edited by Charterino", ConsoleColor.Yellow);
         }
 
         protected override void Unload()
